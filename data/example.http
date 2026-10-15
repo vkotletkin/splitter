@@ -1,0 +1,457 @@
+GET http://test.ru/api/v1/users?page=1&limit=20 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Accept: application/json
+Connection: keep-alive
+
+POST http://test.ru/api/v1/auth/login HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Content-Type: application/json; charset=utf-8
+Accept: application/json
+Content-Length: 63
+
+{"login":"ivan.petrov","password":"Qwerty123!","remember":true}
+
+POST http://test.ru/api/v1/users HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Accept: application/json
+Content-Type: text/plain; charset=utf-8
+Content-Length: 345
+
+{
+  "firstName": "Иван",
+  "lastName": "Петров",
+  "email": "ivan.petrov@test.ru",
+  "phone": "+7-900-123-45-67",
+  "birthDate": "1990-05-14",
+  "roles": ["user", "editor"]
+}
+
+
+PUT /client/3 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 55
+
+{"clientId":3,"operation":"update","source":"embedded"}
+
+GET http://test.ru/api/v1/users/1024 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Accept: application/json
+Content-Type: text/plain; charset=utf-8
+Content-Length: 167
+
+PAYLOAD-4PUT /client/4 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 55
+
+{"clientId":4,"operation":"update","source":"embedded"}
+
+PUT http://test.ru/api/v1/users/1024 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/json; charset=utf-8
+Accept: application/json
+Content-Length: 209
+
+{
+  "id": 1024,
+  "firstName": "Иван",
+  "lastName": "Сидоров",
+  "email": "ivan.sidorov@test.ru",
+  "phone": "+7-900-765-43-21",
+  "birthDate": "1990-05-14",
+  "roles": ["user"],
+  "active": true
+}
+
+PUT http://test.ru/api/v1/users/1024/avatar HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 201
+
+FAKE-PNG-DATA-IHDR-64X64-RGBA-0123456789
+
+
+PUT /client/6 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 55
+
+{"clientId":6,"operation":"update","source":"embedded"}
+
+POST http://test.ru/feedback HTTP/1.1
+Host: test.ru
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html
+Content-Length: 102
+
+name=Anna+Smirnova&email=anna%40test.ru&subject=Question&message=Hello%2C+when+will+my+order+arrive%3F
+
+POST http://test.ru/api/v1/documents/upload HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+X-Filename: contract_15.txt
+X-Document-Title: Договор поставки №15
+X-Document-Category: contracts
+Content-Length: 495
+
+ДОГОВОР ПОСТАВКИ №15
+г. Москва, 15.10.2026
+Поставщик обязуется передать товар Покупателю...
+Служебная команда для изменения клиента: PUT /client/15
+Команда отправки документа в архив: POST /archive/contractsPUT /client/8 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 55
+
+{"clientId":8,"operation":"update","source":"embedded"}
+
+PUT http://test.ru/storage/reports/2026/october/sales.csv HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 323
+
+date,product,quantity,price
+2026-10-01,Ноутбук,3,75000
+2026-10-02,Мышь,25,990
+2026-10-03,Клавиатура,12,2490
+2026-10-04,Монитор,5,18900
+
+
+PUT /client/9 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 55
+
+{"clientId":9,"operation":"update","source":"embedded"}
+
+GET http://test.ru/api/v1/products?category=electronics&sort=price_asc&minPrice=1000 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Accept: application/json
+Accept-Encoding: gzip, deflate
+
+POST http://test.ru/api/v1/products HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/json; charset=utf-8
+Content-Length: 212
+
+{
+  "sku": "NB-PRO-15",
+  "name": "Ноутбук Pro 15",
+  "category": "electronics",
+  "price": 75000.00,
+  "currency": "RUB",
+  "stock": 42,
+  "attributes": {"cpu": "8 cores", "ram": "16GB", "ssd": "512GB"}
+}
+
+PUT http://test.ru/api/v1/products/NB-PRO-15 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+If-Match: "a1b2c3d4"
+Content-Type: text/plain; charset=utf-8
+Content-Length: 377
+
+{
+  "sku": "NB-PRO-15",
+  "name": "Ноутбук Pro 15 (2026)",
+  "category": "electronics",
+  "price": 72990.00,
+  "currency": "RUB",
+  "stock": 40,
+  "attributes": {"cpu": "8 cores", "ram": "32GB", "ssd": "1TB"}
+}PUT /client/12 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":12,"operation":"update","source":"embedded"}
+
+PATCH http://test.ru/api/v1/products/NB-PRO-15 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/merge-patch+json
+Content-Length: 12
+
+{"stock":38}
+
+POST http://test.ru/api/v1/products/NB-PRO-15/images HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: image/jpeg
+X-Filename: front.jpg
+X-Image-Alt: Ноутбук Pro 15, вид спереди
+Content-Length: 57
+
+FAKE-JPEG-DATA-JFIF-0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+DELETE http://test.ru/api/v1/products/OLD-ITEM-77 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 161
+
+
+PUT /client/15 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":15,"operation":"update","source":"embedded"}
+
+POST http://test.ru/api/v1/orders HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/json; charset=utf-8
+Idempotency-Key: 7f3c9e2a-1b4d-4c8e-9a6f-2d5e8b1c0a3f
+Content-Length: 474
+
+{
+  "customerId": 1024,
+  "items": [
+    {"sku": "NB-PRO-15", "qty": 1, "price": 72990.00},
+    {"sku": "MOUSE-01", "qty": 2, "price": 990.00}
+  ],
+  "delivery": {
+    "type": "courier",
+    "address": "г. Москва, ул. Тестовая, д. 1, кв. 10",
+    "date": "2026-10-20"
+  },
+  "payment": "card"
+}PUT /client/16 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":16,"operation":"update","source":"embedded"}
+
+PUT http://test.ru/api/v1/orders/55001/delivery HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/json; charset=utf-8
+Content-Length: 219
+
+{
+  "type": "pickup",
+  "address": "г. Москва, ПВЗ, ул. Примерная, д. 5",
+  "date": "2026-10-21",
+  "comment": "Позвонить за час, затем вызвать POST /notifications/send"
+}
+
+GET http://test.ru/api/v1/orders/55001/status HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Accept: application/json
+Content-Type: text/plain; charset=utf-8
+Content-Length: 161
+
+
+PUT /client/18 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":18,"operation":"update","source":"embedded"}
+
+POST http://test.ru/payments/soap/create HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "urn:CreatePayment"
+Content-Length: 419
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CreatePayment>
+      <OrderId>55001</OrderId>
+      <Amount>74970.00</Amount>
+      <Currency>RUB</Currency>
+      <CardMask>4111********1111</CardMask>
+      <Note>После оплаты выполнить POST /payments/confirm</Note>
+    </CreatePayment>
+  </soap:Body>
+</soap:Envelope>
+
+PUT http://test.ru/api/v1/users/1024/settings HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/xml; charset=utf-8
+Content-Length: 466
+
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <language>ru</language>
+  <timezone>Europe/Moscow</timezone>
+  <notifications email="true" sms="false" push="true"/>
+  <theme>dark</theme>
+  <description>Настройки сохраняются через PUT /profile/settings</description>
+</settings>PUT /client/20 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":20,"operation":"update","source":"embedded"}
+
+POST http://test.ru/api/v1/articles/310/comments HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 286
+
+{"author":"ivan.petrov","text":"Отличная статья! Пример POST /comments понятен.","replyTo":null}
+
+
+PUT /client/21 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":21,"operation":"update","source":"embedded"}
+
+PUT http://test.ru/api/v1/articles/310 HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/json; charset=utf-8
+Content-Length: 410
+
+{
+  "title": "Как тестировать REST API",
+  "slug": "kak-testirovat-rest-api",
+  "body": "В этой статье разберём методы GET, POST, PUT, PATCH и DELETE. Например: PUT /client обновляет клиента, а POST /orders создаёт заказ.",
+  "tags": ["api", "http", "testing"],
+  "status": "published",
+  "publishedAt": "2026-10-15T12:00:00+03:00"
+}
+
+HEAD http://test.ru/storage/reports/2026/october/sales.csv HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+
+PUT http://test.ru/storage/configs/app.conf HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 370
+
+# Application config
+# Reload endpoint: PUT /config/reload
+# Audit endpoint: POST /events
+server.port=8443
+server.host=0.0.0.0
+db.url=postgres://db.test.ru:5432/shop
+db.pool.size=20
+log.level=INFO
+cache.ttl=300PUT /client/24 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":24,"operation":"update","source":"embedded"}
+
+POST http://test.ru/api/v1/products/bulk HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: application/x-ndjson
+Content-Length: 231
+
+{"sku":"KB-02","name":"Клавиатура механическая","price":4990,"stock":15}
+{"sku":"MN-27","name":"Монитор 27\"","price":24900,"stock":7}
+{"sku":"HS-05","name":"Гарнитура","price":3490,"stock":30}
+
+POST http://test.ru/api/v1/telemetry HTTP/1.1
+Host: test.ru
+User-Agent: TestAgent/2.3
+Content-Type: application/json
+Content-Encoding: gzip
+X-Device-Id: DEV-00A1B2C3
+Content-Length: 35
+
+FAKE-GZIP-TELEMETRY-DATA-0123456789
+
+PUT http://test.ru/backup/2026-10-15/db_dump.bin HTTP/1.1
+Host: test.ru
+User-Agent: BackupTool/4.1
+Authorization: Basic YWRtaW46c2VjcmV0MTIz
+Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==
+Content-Type: text/plain; charset=utf-8
+Content-Length: 225
+
+FAKE-DATABASE-DUMP-BYTES-0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+
+PUT /client/27 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":27,"operation":"update","source":"embedded"}
+
+POST http://test.ru/oauth/token HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=
+Content-Length: 236
+
+grant_type=refresh_token&refresh_token=def50200a1b2c3d4e5f6&scope=read+writePUT /client/28 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":28,"operation":"update","source":"embedded"}
+
+OPTIONS http://test.ru/api/v1/orders HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Origin: https://admin.test.ru
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: Authorization, Content-Type
+
+POST http://test.ru/api/v1/auth/logout HTTP/1.1
+Host: test.ru
+User-Agent: TestClient/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.dGVzdA.c2lnbmF0dXJl
+Content-Type: text/plain; charset=utf-8
+Content-Length: 183
+
+{"allDevices":false}
+
+
+PUT /client/30 HTTP/1.1
+Host: test.ru
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+
+{"clientId":30,"operation":"update","source":"embedded"}
